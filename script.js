@@ -2,9 +2,8 @@
 
 
 
-const randomNumberResult = Math.floor(Math.random() * 20 + 1);
-console.log(randomNumberResult)
-
+let randomNumberResult = Math.floor(Math.random() * 20 + 1);
+console.log(randomNumberResult) // for debugging
 const selectPlayerInput = document.querySelector("input.guess");
 const highScoreSelector = document.querySelector("span.highscore");
 const scoreSelector = document.querySelector("span.score")
@@ -28,9 +27,10 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
     const storeGuesses = document.createElement('span')
     storeGuesses.style.display = 'flex';
     storeGuesses.style.justifyContent = 'center';
+    storeGuesses.style.alignItems = 'center';
     storeGuesses.style.fontSize = '3rem'
     storeGuesses.innerHTML = "Guess:" + getValueFromPlayer
-    body.append(storeGuesses)
+    body.appendChild(storeGuesses)
 
     // limits input between 1-20
     if (getValueFromPlayer < 0 || getValueFromPlayer > 20) {
@@ -38,7 +38,7 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         selectPlayerInput.value = "" // clears input field when invalid value is added
         return;
     }
-    // if result is correct
+    // if player has won
     if (getValueFromPlayer === randomNumberResult) {
         printMessage.textContent = "You win!";
         // replaces background with gif when win and adds confetti
@@ -47,9 +47,12 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         document.body.style.backgroundRepeat = 'no-repeat';
         document.body.style.backgroundPosition = 'center';
         document.body.style.backgroundSize = 'cover';
-        const jsConfetti = new JSConfetti()
-        jsConfetti.addConfetti()
+        const jsConfetti = new JSConfetti();
+        jsConfetti.addConfetti();
         playerHasWon = true;
+        // reset randomNumberResult if user wants to keep playing and beat their highScore
+        randomNumberResult = Math.floor(Math.random() * 20 + 1);
+        console.log(randomNumberResult)
 
         // set score to highScore if higher than highScore
         if (score > highScore) {
@@ -70,8 +73,10 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
             scoreSelector.textContent = 20;
             highScoreSelector.textContent = "0";
             selectPlayerInput.value = ""
-            const removeGuesses = storeGuesses.remove()
+            storeGuesses.remove()
             document.body.style.backgroundImage = ''
+            document.querySelector(".number").textContent = "?"
+
         });
     }
     restartGameScore()
