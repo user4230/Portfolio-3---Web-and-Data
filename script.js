@@ -30,7 +30,6 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         selectPlayerInput.value = "" // clears input field when invalid value is added
         return;
     }
-
     if (getValueFromPlayer === randomNumberResult) {
         printMessage.textContent = "You are correct!";
         document.querySelector(".number").textContent = randomNumberResult // prints correct result in "?"
@@ -46,16 +45,17 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
             scoreSelector.textContent = score;
     }
     selectPlayerInput.value = "" // clears input field
+
+    function restartGameScore() {
+        document.querySelector("button.again").addEventListener("click", () => {
+            scoreSelector.textContent = 20;
+            highScoreSelector.textContent = "0";
+            selectPlayerInput.value = ""
+            const removeGuesses = storeGuesses.remove()
+        });
+    }
+    restartGameScore()
+
 })
 }
 checkIfGuessCorrect();
-
-function restartGameScore() {
-    document.querySelector("button.again").addEventListener("click", () => {
-        scoreSelector.textContent = score;
-        highScoreSelector.textContent = "0";
-        selectPlayerInput.value = ""
-    });
-}
-restartGameScore()
-
