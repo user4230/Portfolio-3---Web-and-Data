@@ -7,7 +7,6 @@ console.log(randomNumberResult) // for debugging
 const selectPlayerInput = document.querySelector("input.guess");
 const highScoreSelector = document.querySelector("span.highscore");
 const scoreSelector = document.querySelector("span.score")
-const body = document.body
 let score = 20;
 let highScore = 0;
 let playerHasWon = false;
@@ -23,14 +22,17 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         return;
     }
 
-    // logs guesses made
-    const storeGuesses = document.createElement('span')
-    storeGuesses.style.display = 'flex';
-    storeGuesses.style.justifyContent = 'center';
-    storeGuesses.style.alignItems = 'center';
-    storeGuesses.style.fontSize = '3rem'
-    storeGuesses.innerHTML = "Guess:" + getValueFromPlayer
-    body.appendChild(storeGuesses)
+    // logs guesses made and stores them in right section
+    const storeGuesses = document.createElement('span');
+    storeGuesses.style.display = "flex";
+    storeGuesses.style.alignItems = "column";
+    storeGuesses.style.lineHeight = "3rem"
+    storeGuesses.style.fontSize = '2rem';
+    storeGuesses.style.right = '100px';
+    storeGuesses.style.top = "100px";
+    storeGuesses.innerHTML = "❓ Guess: " + getValueFromPlayer;
+    const rightSection = document.querySelector("section.right");
+    rightSection.appendChild(storeGuesses)
 
     // limits input between 1-20
     if (getValueFromPlayer < 0 || getValueFromPlayer > 20) {
