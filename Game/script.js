@@ -43,7 +43,7 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         printMessage.textContent = "You win!";
         // replaces background with gif when win and adds confetti
         document.querySelector(".number").textContent = randomNumberResult // prints correct result in "?"
-        document.body.style.backgroundImage = 'url(https://data.textstudio.com/output/sample/animated/5/9/8/5/win-25-5895.gif)'
+        document.body.style.backgroundImage = 'url(https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWJmZzMzZWc3czE3MTc0cmQ1cmhqNHhkb3Y0YTZwZXFlMjF3aHl1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uRAhwxlVBP6ied6EgB/giphy.webp)'
         document.body.style.backgroundRepeat = 'no-repeat';
         document.body.style.backgroundPosition = 'center';
         document.body.style.backgroundSize = 'cover';
