@@ -65,8 +65,12 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
             highScoreSelector.textContent = highScore
         }
         // if user is wrong
-        } else {
-            printMessage.textContent = "Try again!";
+        } else if (getValueFromPlayer < randomNumberResult) {
+            printMessage.textContent = "Number is higher!";
+            score--;
+            scoreSelector.textContent = score;
+        } else if (getValueFromPlayer > randomNumberResult) {
+            printMessage.textContent = "Number is lower!";
             score--;
             scoreSelector.textContent = score;
     }
