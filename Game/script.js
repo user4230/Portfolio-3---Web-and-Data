@@ -1,7 +1,7 @@
 'use strict';
 
 
-
+// random number generator
 let randomNumberResult = Math.floor(Math.random() * 20 + 1);
 console.log(randomNumberResult) // for debugging
 const selectPlayerInput = document.querySelector("input.guess");
@@ -10,32 +10,35 @@ const scoreSelector = document.querySelector("span.score")
 let score = 20;
 let highScore = 0;
 let playerHasWon = false;
+// create empty array to store all guesses the user has made
+const playerInputArray = []
+// create element "paragraph" in html to store the user's guesses
+const storeGuesses = document.createElement('p');
+storeGuesses.style.display = "flex";
+storeGuesses.style.alignItems = "column";
+storeGuesses.style.lineHeight = "3rem"
+storeGuesses.style.fontSize = '2rem';
+storeGuesses.style.right = '100px';
+storeGuesses.style.top = "100px";
+// append it to right section to match the theme of the website
+const rightSection = document.querySelector("section.right");
+rightSection.appendChild(storeGuesses)
 
 function ifNumberCorrect() {
 document.querySelector("button.btn.check").addEventListener("click", () => {
 
     let printMessage = document.querySelector("p.message");
     let getValueFromPlayer = Number(selectPlayerInput.value)
+    playerInputArray.push(getValueFromPlayer)
+    storeGuesses.innerHTML = `❓ Guesses: ${playerInputArray.join (', ')}`;
 
     if (selectPlayerInput.value === "") {
         printMessage.textContent = "Please use a number!"
         return;
     }
 
-    // logs guesses made and stores them in right section
-    const storeGuesses = document.createElement('span');
-    storeGuesses.style.display = "flex";
-    storeGuesses.style.alignItems = "column";
-    storeGuesses.style.lineHeight = "3rem"
-    storeGuesses.style.fontSize = '2rem';
-    storeGuesses.style.right = '100px';
-    storeGuesses.style.top = "100px";
-    storeGuesses.innerHTML = "❓ Guess: " + getValueFromPlayer;
-    const rightSection = document.querySelector("section.right");
-    rightSection.appendChild(storeGuesses)
-
     // limits input between 1-20
-    if (getValueFromPlayer < 0 || getValueFromPlayer > 20) {
+    if (getValueFromPlayer < 1 || getValueFromPlayer > 20) {
         printMessage.textContent = "Please use a number between 1-20!"
         selectPlayerInput.value = "" // clears input field when invalid value is added
         return;
