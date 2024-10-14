@@ -3,13 +3,14 @@
 
 // random number generator
 let randomNumberResult = Math.floor(Math.random() * 20 + 1);
-console.log(randomNumberResult) // for debugging
+
 const selectPlayerInput = document.querySelector("input.guess");
 const highScoreSelector = document.querySelector("span.highscore");
 const scoreSelector = document.querySelector("span.score")
 let score = 20;
 let highScore = 0;
 let playerHasWon = false;
+
 // create empty array to store all guesses the user has made
 const playerInputArray = []
 // create element "paragraph" in html to store the user's guesses
@@ -55,9 +56,6 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
         const jsConfetti = new JSConfetti();
         jsConfetti.addConfetti();
         playerHasWon = true;
-        // reset randomNumberResult if user wants to keep playing and beat their highScore
-        randomNumberResult = Math.floor(Math.random() * 20 + 1);
-        console.log(randomNumberResult)
 
         // set score to highScore if higher than highScore
         if (score > highScore) {
@@ -74,22 +72,25 @@ document.querySelector("button.btn.check").addEventListener("click", () => {
             score--;
             scoreSelector.textContent = score;
     }
-    selectPlayerInput.value = "" // clears input field
-
-    // again button functionality
-    function restartGameScore() {
-        document.querySelector("button.again").addEventListener("click", () => {
-            scoreSelector.textContent = 20;
-            highScoreSelector.textContent = "0";
-            selectPlayerInput.value = ""
-            storeGuesses.remove()
-            document.body.style.backgroundImage = ''
-            document.querySelector(".number").textContent = "?"
-
-        });
-    }
-    restartGameScore()
+    selectPlayerInput.value = ""; // clears input field
 
 })
 }
 ifNumberCorrect();
+
+// again button functionality
+function restartGameScore() {
+    document.querySelector("button.again").addEventListener("click", () => {
+        score = 20;
+        scoreSelector.textContent = score;
+        highScoreSelector.textContent = "0";
+        playerInputArray.length = 0;
+        selectPlayerInput.value = "";
+        storeGuesses.innerHTML = "";
+        document.body.style.backgroundImage = '';
+        document.querySelector(".number").textContent = "?";
+        playerHasWon = false;
+        randomNumberResult = Math.floor(Math.random() * 20 + 1);
+    });
+}
+restartGameScore()
